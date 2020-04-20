@@ -22,3 +22,8 @@ Maps have been represented in jupyter notebooks using [folium library](https://p
 Other requeriment we have made ourselves is:
 
 -New office nust be located in the US (which is the origin of the company) and in the East Coast (to facility connections to Europe).
+
+Instructions:
+-You must copy the file companies.json from [Crunchbase Data](https://data.crunchbase.com/docs) on an input folder located in parent directory.
+-You must get API access to from Foursquare and Amadeus and save them in the .env file as: AMADEUS_APIKEY, AMADEUS_APISECRET, FOURSQUARE_CLIENTID and FOURSQUARE_CLIENTSECRET.
+-Sometimes a map from folium takes up to 30 second to be loaded. Please, be patient.
