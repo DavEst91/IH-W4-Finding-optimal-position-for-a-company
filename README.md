@@ -1,4 +1,4 @@
-# IH-W4-Mongo-project
+# IH-W4-Finding optimal position for a company
 
 A Gaming company has been recenty created. As data engineers, we have been tasked with finding the optimal location for our new company. We have been asking all the employees about their preferences and those are the requisites we found.
 
