@@ -1,0 +1,696 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Finding best position for our company}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Connecting to the database and importing the relevant libraries
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{folium}
+        \PY{k+kn}{from} \PY{n+nn}{src} \PY{k}{import} \PY{n}{AMADEUS\PYZus{}API}
+        \PY{k+kn}{from} \PY{n+nn}{src} \PY{k}{import} \PY{n}{FOURSQUARE\PYZus{}API}
+        \PY{k+kn}{from} \PY{n+nn}{src} \PY{k}{import} \PY{n}{folium\PYZus{}functions}
+        \PY{k+kn}{from} \PY{n+nn}{pymongo} \PY{k}{import} \PY{n}{MongoClient}
+        
+        \PY{n}{client} \PY{o}{=} \PY{n}{MongoClient}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mongodb://localhost/companies}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{db} \PY{o}{=} \PY{n}{client}\PY{o}{.}\PY{n}{get\PYZus{}database}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    We have priorized the fact that the new office must be nearby other
+companies that also do design. That is the most demanding requirement
+and therefore, must be the first one.
+
+First, we are goint to check in our database which kind of companys are
+interesting to us.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{category\PYZus{}codes}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{db}\PY{o}{.}\PY{n}{companies}\PY{o}{.}\PY{n}{distinct}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{category\PYZus{}codes}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[None, 'advertising', 'analytics', 'automotive', 'biotech', 'cleantech', 'consulting', 'design', 'ecommerce', 'education', 'enterprise', 'fashion', 'finance', 'games\_video', 'government', 'hardware', 'health', 'hospitality', 'legal', 'local', 'manufacturing', 'medical', 'messaging', 'mobile', 'music', 'nanotech', 'network\_hosting', 'news', 'nonprofit', 'other', 'photo\_video', 'public\_relations', 'real\_estate', 'search', 'security', 'semiconductor', 'social', 'software', 'sports', 'transportation', 'travel', 'web']
+
+    \end{Verbatim}
+
+    For our purpose, companies dedicated to videogames (games\_video),
+hardware, mobile, software, and web are interesting, so we are goint to
+obtain all the information of the companies matching this tags.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{interesting\PYZus{}companies}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{db}\PY{o}{.}\PY{n}{companies}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}or}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{[}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}eq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{games\PYZus{}video}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}eq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{software}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}eq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mobile}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}eq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{software}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}eq}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{web}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{\PYZcb{}}\PY{p}{]}\PY{p}{\PYZcb{}}\PY{p}{,}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{offices}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}First we structure the information in dictionarys}
+        
+        \PY{n}{company\PYZus{}data}\PY{o}{=}\PY{p}{[}
+           \PY{p}{[}
+                
+            \PY{p}{\PYZob{}}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{element}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{element}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{element}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{category\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{address1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{address1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{address2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{address2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{city}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{city}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{country\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{country\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{description}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{description}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{state\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{state\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,}
+            \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{zip\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{n}{offices}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{zip\PYZus{}code}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{p}{\PYZcb{}} 
+          
+        \PY{k}{for} \PY{n}{offices} \PY{o+ow}{in} \PY{n}{element}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{offices}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}
+                      
+                      \PY{k}{for} \PY{n}{element} \PY{o+ow}{in} \PY{n}{interesting\PYZus{}companies}\PY{p}{]}
+        
+        
+        
+        \PY{c+c1}{\PYZsh{}Now we flatten the list using another list comprehension}
+        
+        \PY{n}{company\PYZus{}data}\PY{o}{=}\PY{p}{[}\PY{n}{office} \PY{k}{for} \PY{n}{empresas} \PY{o+ow}{in} \PY{n}{company\PYZus{}data} \PY{k}{for} \PY{n}{office} \PY{o+ow}{in} \PY{n}{empresas}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{df}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{company\PYZus{}data}\PY{p}{)}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latitude}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{games\PYZus{}video}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{web}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{hardware}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{software}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{mobile}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}
+        
+        \PY{n}{m}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+        
+        \PY{n}{m}
+        \PY{c+c1}{\PYZsh{}sns.scatterplot(x=\PYZdq{}longitude\PYZdq{},y=\PYZdq{}latitude\PYZdq{},data=df,hue=\PYZdq{}category\PYZus{}code\PYZdq{})}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} <folium.folium.Map at 0x7f17ba380b70>
+\end{Verbatim}
+            
+    We are going to limit the search to the United States
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{country\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{USA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        
+        \PY{n}{m}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+        
+        \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+        \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} <folium.folium.Map at 0x7f177fc71160>
+\end{Verbatim}
+            
+    We crearly see that some offices are not well labeles, so we get rid of
+them by hand (And also Haway offices).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{longitude}\PY{o}{\PYZlt{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{50}\PY{p}{]}
+        \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{longitude}\PY{o}{\PYZgt{}}\PY{o}{\PYZhy{}}\PY{l+m+mi}{150}\PY{p}{]}
+        
+        \PY{n}{m}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+        \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} <folium.folium.Map at 0x7f175fe90da0>
+\end{Verbatim}
+            
+    By plotting the coordinates of all offices that are interesting for us,
+we clearly see different clusters with some disperse points. We are
+going to use KMeans method, not to predict (because that is not what we
+are aiming to) but to make some calculations on each cluster.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+        
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{longitude}\PY{p}{,}\PY{n}{df}\PY{o}{.}\PY{n}{latitude}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+        
+        \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{kmeans}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+        
+        \PY{n}{cluster\PYZus{}centers}\PY{o}{=}\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}
+        
+        \PY{n}{dict\PYZus{}colors\PYZus{}cluster}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+m+mi}{0}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}
+        \PY{n}{m}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{40}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{100}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m}\PY{p}{,}\PY{n}{df}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cluster}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}cluster}\PY{p}{)}
+        \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{p}{[}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster 0 centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+        \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{p}{[}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster 1 centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{red}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+        \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{p}{[}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}centers}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Cluster 2 centroid}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{blue}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m}\PY{p}{)}
+        \PY{n}{m}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} <folium.folium.Map at 0x7f175d472080>
+\end{Verbatim}
+            
+    In the map, we see that the center of our centroids corresponds to the
+East Coast, the Middle West and the Pacific Coast. We are going to work
+with the offices in the cluster of the East Coast, due to its
+connections to Europe.
+
+Also, we are going to limit our search to states that have at least 100
+tech-related companies.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{df}\PY{o}{=}\PY{n}{df}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{cluster}\PY{o}{==}\PY{l+m+mi}{1}\PY{p}{]} 
+        
+        \PY{n}{data\PYZus{}NY}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{data\PYZus{}MA}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+        \PY{n}{data\PYZus{}FL}\PY{o}{=}\PY{n}{df}\PY{p}{[}\PY{n}{df}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{m1} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{40.5}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mi}{74}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m1}\PY{p}{,}\PY{n}{data\PYZus{}NY}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+         \PY{n}{m1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} <folium.folium.Map at 0x7f175d82f7b8>
+\end{Verbatim}
+            
+    We can clearly see that the centroid of our cluster is desviated from
+where most of the companies have its officces due to the influence of
+outliers, but we observe that most of company are located in Manhattan,
+New York, whose coordinates are {[}40.7834282,-73.9662476{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{40.76305}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{73.97777}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{m2} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{42.36}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{71.05}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{12}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m2}\PY{p}{,}\PY{n}{data\PYZus{}MA}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+         
+         \PY{n}{m2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} <folium.folium.Map at 0x7f1750d2c438>
+\end{Verbatim}
+            
+    We are going to choose the coordinates for Boston in the center of its
+financial district {[}42.3602534 , 71.0582912{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{42.3602534} \PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{71.0582912}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{m3} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{27.1865}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{81.1437}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m3}\PY{p}{,}\PY{n}{data\PYZus{}FL}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{)}
+         
+         \PY{n}{m3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} <folium.folium.Map at 0x7f1750a890b8>
+\end{Verbatim}
+            
+    For Florida we are going to choose the coordinates for Miami
+{[}25.77426,-80.1936{]}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{o}{=}\PY{p}{[}\PY{l+m+mf}{25.77426}\PY{p}{,}\PY{o}{\PYZhy{}}\PY{l+m+mf}{80.1936}\PY{p}{]} 
+\end{Verbatim}
+
+
+    Now we are goint to check whether or not the points we have choosed meet
+the requeriments and summarize it on a table.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{summary\PYZus{}table}\PY{o}{=}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{state\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{]}
+\end{Verbatim}
+
+
+    So we have three probable locations for our office that are surrounded
+by tech-related companies. We are going to check other requeriments.
+
+First we are going to check another important requirement:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{NY\PYZus{}airport}\PY{p}{,}\PY{n}{NY\PYZus{}distance}\PY{o}{=}\PY{n}{AMADEUS\PYZus{}API}\PY{o}{.}\PY{n}{closest\PYZus{}airport}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         \PY{n}{MA\PYZus{}airport}\PY{p}{,}\PY{n}{MA\PYZus{}distance}\PY{o}{=}\PY{n}{AMADEUS\PYZus{}API}\PY{o}{.}\PY{n}{closest\PYZus{}airport}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         \PY{n}{FL\PYZus{}airport}\PY{p}{,}\PY{n}{FL\PYZus{}distance}\PY{o}{=}\PY{n}{AMADEUS\PYZus{}API}\PY{o}{.}\PY{n}{closest\PYZus{}airport}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{;}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AIRPORT NAME}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}airport}\PY{p}{,}\PY{n}{MA\PYZus{}airport}\PY{p}{,}\PY{n}{FL\PYZus{}airport}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{AIRPORT DISTANCE (KM)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}distance}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{NY\PYZus{}starbucks}\PY{p}{,}\PY{n}{NY\PYZus{}starbucks\PYZus{}distance}\PY{p}{,}\PY{n}{NY\PYZus{}starbucks\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{MA\PYZus{}starbucks}\PY{p}{,}\PY{n}{MA\PYZus{}starbucks\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}starbucks\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{FL\PYZus{}starbucks}\PY{p}{,}\PY{n}{FL\PYZus{}starbucks\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}starbucks\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks address}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}starbucks}\PY{p}{,}\PY{n}{MA\PYZus{}starbucks}\PY{p}{,}\PY{n}{FL\PYZus{}starbucks}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks distance (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}starbucks\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}starbucks\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}starbucks\PYZus{}distance}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}starbucks\PYZus{}position}\PY{p}{,}\PY{n}{MA\PYZus{}starbucks\PYZus{}position}\PY{p}{,}\PY{n}{FL\PYZus{}starbucks\PYZus{}position}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{NY\PYZus{}vegan}\PY{p}{,}\PY{n}{NY\PYZus{}vegan\PYZus{}distance}\PY{p}{,}\PY{n}{NY\PYZus{}vegan\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{MA\PYZus{}vegan}\PY{p}{,}\PY{n}{MA\PYZus{}vegan\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}vegan\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{FL\PYZus{}vegan}\PY{p}{,}\PY{n}{FL\PYZus{}vegan\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}vegan\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan address}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}vegan}\PY{p}{,}\PY{n}{MA\PYZus{}vegan}\PY{p}{,}\PY{n}{FL\PYZus{}vegan}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan distance (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}vegan\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}vegan\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}vegan\PYZus{}distance}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}vegan\PYZus{}position}\PY{p}{,}\PY{n}{MA\PYZus{}vegan\PYZus{}position}\PY{p}{,}\PY{n}{FL\PYZus{}vegan\PYZus{}position}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{NY\PYZus{}childcare}\PY{p}{,}\PY{n}{NY\PYZus{}childcare\PYZus{}distance}\PY{p}{,}\PY{n}{NY\PYZus{}childcare\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{MA\PYZus{}childcare}\PY{p}{,}\PY{n}{MA\PYZus{}childcare\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}childcare\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{FL\PYZus{}childcare}\PY{p}{,}\PY{n}{FL\PYZus{}childcare\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}childcare\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare address}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}childcare}\PY{p}{,}\PY{n}{MA\PYZus{}childcare}\PY{p}{,}\PY{n}{FL\PYZus{}childcare}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare distance (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}childcare\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}childcare\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}childcare\PYZus{}distance}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}childcare\PYZus{}position}\PY{p}{,}\PY{n}{MA\PYZus{}childcare\PYZus{}position}\PY{p}{,}\PY{n}{FL\PYZus{}childcare\PYZus{}position}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{NY\PYZus{}nightlife}\PY{p}{,}\PY{n}{NY\PYZus{}nightlife\PYZus{}distance}\PY{p}{,}\PY{n}{NY\PYZus{}nightlife\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}NY}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{MA\PYZus{}nightlife}\PY{p}{,}\PY{n}{MA\PYZus{}nightlife\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}nightlife\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}MA}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{FL\PYZus{}nightlife}\PY{p}{,}\PY{n}{FL\PYZus{}nightlife\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}nightlife\PYZus{}position}\PY{o}{=}\PY{n}{FOURSQUARE\PYZus{}API}\PY{o}{.}\PY{n}{foursquare}\PY{p}{(}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{cluster\PYZus{}center\PYZus{}FL}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife address}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}nightlife}\PY{p}{,}\PY{n}{MA\PYZus{}nightlife}\PY{p}{,}\PY{n}{FL\PYZus{}nightlife}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife distance (m)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}nightlife\PYZus{}distance}\PY{p}{,}\PY{n}{MA\PYZus{}nightlife\PYZus{}distance}\PY{p}{,}\PY{n}{FL\PYZus{}nightlife\PYZus{}distance}\PY{p}{]}
+         \PY{n}{summary\PYZus{}table}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{=}\PY{p}{[}\PY{n}{NY\PYZus{}nightlife\PYZus{}position}\PY{p}{,}\PY{n}{MA\PYZus{}nightlife\PYZus{}position}\PY{p}{,}\PY{n}{FL\PYZus{}nightlife\PYZus{}position}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{m1} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m1}\PY{p}{,}\PY{n}{data\PYZus{}NY}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{,}\PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Office position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Starbucks coffee shop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgreen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vegan restaurant}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Childcare center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nightlife club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m1}\PY{p}{)}
+         
+         \PY{n}{m1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} <folium.folium.Map at 0x7f17502a70f0>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{m2} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m2}\PY{p}{,}\PY{n}{data\PYZus{}MA}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{,}\PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Office position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Starbucks coffee shop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgreen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vegan restaurant}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Childcare center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{MA}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nightlife club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m2}\PY{p}{)}
+         
+         \PY{n}{m2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} <folium.folium.Map at 0x7f174ff3c6d8>
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{m3} \PY{o}{=} \PY{n}{folium}\PY{o}{.}\PY{n}{Map}\PY{p}{(}\PY{n}{location}\PY{o}{=}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{zoom\PYZus{}start}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{no\PYZus{}touch}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         \PY{n}{folium\PYZus{}functions}\PY{o}{.}\PY{n}{add\PYZus{}points\PYZus{}to\PYZus{}map}\PY{p}{(}\PY{n}{m3}\PY{p}{,}\PY{n}{data\PYZus{}FL}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category\PYZus{}code}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{dict\PYZus{}colors\PYZus{}categories}\PY{p}{,}\PY{n}{radius}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Office position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{starbucks position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Starbucks coffee shop}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{darkgreen}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{vegan position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Vegan restaurant}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{green}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{childcare position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Childcare center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{orange}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         \PY{n}{folium}\PY{o}{.}\PY{n}{Marker}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{FL}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nightlife position}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{,}\PY{n}{popup}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nightlife club}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{icon}\PY{o}{=}\PY{n}{folium}\PY{o}{.}\PY{n}{Icon}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{gray}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{add\PYZus{}to}\PY{p}{(}\PY{n}{m3}\PY{p}{)}
+         
+         \PY{n}{m3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} <folium.folium.Map at 0x7f174fca14a8>
+\end{Verbatim}
+            
+    Looking at the three maps above we can discard Miami and Boston from our
+proposal because its relatively low density of companies.
+
+Now we are going to check the data from the nearby companies for New
+York.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{NY\PYZus{}GeoJSON}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Point}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coordinates}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{summary\PYZus{}table}\PY{o}{.}\PY{n}{state\PYZus{}code}\PY{o}{==}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{NY}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cluster\PYZus{}pos}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{NY\PYZus{}GeoJSON}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} \{'coordinates': [40.76305, -73.97777], 'type': 'Point'\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{getOfficeNear}\PY{p}{(}\PY{n}{address}\PY{p}{,} \PY{n}{maxDist}\PY{o}{=}\PY{l+m+mi}{1000}\PY{p}{)}\PY{p}{:}
+            \PY{n}{point} \PY{o}{=} \PY{n}{geocode}\PY{p}{(}\PY{n}{address}\PY{p}{)}
+            \PY{k}{return} \PY{p}{\PYZob{}}
+               \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{office}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}near}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}geometry}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{point}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZdl{}maxDistance}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n}{maxDist}\PY{p}{,}
+                 \PY{p}{\PYZcb{}}
+               \PY{p}{\PYZcb{}}
+            \PY{p}{\PYZcb{}}
+        
+        \PY{k}{def} \PY{n+nf}{geocode}\PY{p}{(}\PY{n}{address}\PY{p}{)}\PY{p}{:}
+            \PY{l+s+sd}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        \PY{l+s+sd}{    Use geocode api to do forward geocoding. https://geocode.xyz/api}
+        \PY{l+s+sd}{    \PYZsq{}\PYZsq{}\PYZsq{}}
+            \PY{n}{res} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{https://geocode.xyz/}\PY{l+s+si}{\PYZob{}address\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}\PY{n}{params}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{json}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{1}\PY{p}{\PYZcb{}}\PY{p}{)}
+            \PY{n}{data} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{json}\PY{p}{(}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{n}{res}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} Return as GeoJSON \PYZhy{}\PYZgt{} https://geojson.org/}
+            \PY{k}{return} \PY{p}{\PYZob{}}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{type}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Point}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{coordinates}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{p}{[}\PY{n+nb}{float}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{longt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{float}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{latt}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{]}
+            \PY{p}{\PYZcb{}}
+        
+        \PY{n}{cur} \PY{o}{=} \PY{n}{db}\PY{o}{.}\PY{n}{companies}\PY{o}{.}\PY{n}{find}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
