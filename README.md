@@ -17,4 +17,8 @@ Locations of the airports have been found using [Amadeus API](https://developers
 
 Social requeriments have been checked using [Foursquare places API](https://developer.foursquare.com/docs/places-api/).
 
-Maps have been represented in jupyter notebooks using [folium library](https://python-visualization.github.io/folium/)
+Maps have been represented in jupyter notebooks using [folium library](https://python-visualization.github.io/folium/).
+
+Other requeriment we have made ourselves is:
+
+-New office nust be located in the US (which is the origin of the company) and in the East Coast (to facility connections to Europe).
